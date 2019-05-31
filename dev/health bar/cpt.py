@@ -4,7 +4,7 @@ import arcade
 WIDTH = 640
 HEIGHT = 480
 
-player_health = 100
+player_health = 99
 player_max_health = 100
 
 
