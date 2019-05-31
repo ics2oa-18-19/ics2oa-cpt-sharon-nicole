@@ -18,8 +18,8 @@ def on_draw():
         arcade.draw_text("press I for instructions ", WIDTH/2, HEIGHT/2-30, arcade.color.RED)
         arcade.draw_text("press P for play screen", WIDTH / 2, HEIGHT / 2 - 60, arcade.color.RED)
     elif  current_screen == "instruction":
-        arcade.draw_text("instructions: Click button to control fish. Steer away from nets, hooks, and collect bubbles for extra health", WIDTH/2, HEIGHT/2, arcade.color.RED)
-        arcade.draw_text("press esc to go back to main menu", WIDTH- 10, HEIGHT/2-30, arcade.color.RED)
+        arcade.draw_text("instructions: Click button to control fish. Steer away from nets, hooks, and collect bubbles for extra health", WIDTH/16, HEIGHT/2, arcade.color.RED)
+        arcade.draw_text("press esc to go back to main menu", WIDTH/16, HEIGHT/2-30, arcade.color.RED)
     if current_screen == "play":
         arcade.draw_text ("play screen", WIDTH/2, HEIGHT/2, arcade.color.RED)
 
