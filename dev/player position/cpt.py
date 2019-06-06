@@ -1,8 +1,8 @@
 import arcade
 
 
-WIDTH = 640
-HEIGHT = 480
+WIDTH = 1360
+HEIGHT = 710
 
 up = False
 down = False
