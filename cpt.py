@@ -1,17 +1,34 @@
 
+
 import arcade
 
 
 WIDTH = 1360
 HEIGHT = 710
-current_screen = "play"
+current_screen = "menu"
 fish_x = WIDTH/4
 fish_y = HEIGHT/4
 up = False
 down = False
+right = False
+left = False
 
 def update(delta_time):
-    pass
+    global up, down, left, right, fish_x, fish_y
+    if fish_y <= 50:
+        if up == True:
+            fish_y += 2
+    elif fish_y >= 50:
+        if down == True:
+            fish_y -= 2
+    elif fish_x >= 50:
+        if left == True:
+            fish_x -= 2
+    elif fish_x <= 50:
+        if right == True:
+            fish_x += 2
+
+
 
 def on_draw():
     arcade.start_render()
@@ -22,30 +39,48 @@ def on_draw():
         arcade.draw_text("press I for instructions ", WIDTH/2, HEIGHT/2-30, arcade.color.RED)
         arcade.draw_text("press P for play screen", WIDTH / 2, HEIGHT / 2 - 60, arcade.color.RED)
     elif current_screen == "instruction":
-        arcade.draw_text("instructions: W: up, S: down, collect bubbles and move away from other objects", WIDTH/16, HEIGHT/2, arcade.color.RED)
+        arcade.draw_text("instructions: W= up, S= down,A = left, D= right collect bubbles and move away from other objects", WIDTH/16, HEIGHT/2, arcade.color.RED)
         arcade.draw_text("press esc to go back to main menu", WIDTH/16, HEIGHT/2-30, arcade.color.RED)
     elif current_screen == "play":
         arcade.draw_circle_filled(fish_x, fish_y, 25, arcade.color.ORANGE)
+        arcade.draw_circle_filled(fish_x +10, fish_y, 2, arcade.color.BLACK)
 
 def on_key_press(key, modifiers):
-    global current_screen, fish_x, fish_y
+    global current_screen, fish_x, fish_y, up, down, left, right
     print (key)
-    if key == arcade.key.I:
-        current_screen = "instruction"
+    if current_screen == "menu":
+        if key == arcade.key.I:
+            current_screen = "instruction"
+        elif key == arcade.key.P:
+            current_screen = "play screen"
+
     elif key == arcade.key.ESCAPE:
-        current_screen = "menu"
+            current_screen = "menu"
+
+
     elif key == arcade.key.P:
-        current_screen = "play screen"
-    if key == arcade.key.W:
-        fish_y += 10
-    elif key == arcade.key.S:
-        fish_y -= 10
-    elif key == arcade.key.A:
-        fish_x -=10
-    elif key == arcade.key.D:
-        fish_x += 10
+        if key == arcade.key.P:
+            current_screen = "play"
+        if key == arcade.key.W:
+            up = True
+        if key == arcade.key.S:
+            down = True
+        if key == arcade.key.A:
+            left = True
+        if key == arcade.key.D:
+            right = True
+
 def on_key_release(key, modifiers):
-    pass
+    global current_screen, up, down, left, right
+    if current_screen == "play":
+        if key == arcade.key.W:
+            up = False
+        if key == arcade.key.S:
+            down = False
+        if key ==arcade.key.A:
+            left = False
+        if key == arcade.key.D:
+            right = False
 
 
 def on_mouse_press(x, y, button, modifiers):
