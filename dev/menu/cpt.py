@@ -2,8 +2,8 @@
 import arcade
 
 
-WIDTH = 1000
-HEIGHT = 1000
+WIDTH = 1360
+HEIGHT = 710
 current_screen = "menu"
 
 def update(delta_time):
@@ -18,13 +18,13 @@ def on_draw():
         arcade.draw_text("press I for instructions ", WIDTH/2, HEIGHT/2-30, arcade.color.RED)
         arcade.draw_text("press P for play screen", WIDTH / 2, HEIGHT / 2 - 60, arcade.color.RED)
     elif  current_screen == "instruction":
-        arcade.draw_text("instructions: Click button to control fish. Steer away from nets, hooks, and collect bubbles for extra health", WIDTH/16, HEIGHT/2, arcade.color.RED)
+        arcade.draw_text("instructions: W: up, S: down, collect bubbles and move away from other objects", WIDTH/16, HEIGHT/2, arcade.color.RED)
         arcade.draw_text("press esc to go back to main menu", WIDTH/16, HEIGHT/2-30, arcade.color.RED)
     if current_screen == "play":
         arcade.draw_text ("play screen", WIDTH/2, HEIGHT/2, arcade.color.RED)
 
 
-def on_key_press(key, modifiers): 
+def on_key_press(key, modifiers):
     pass
     global current_screen
     print (key)
