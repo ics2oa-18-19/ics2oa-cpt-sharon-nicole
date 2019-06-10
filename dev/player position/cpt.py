@@ -9,6 +9,8 @@ fish_x = WIDTH/4
 fish_y = HEIGHT/4
 seaweed_x = [WIDTH,WIDTH, WIDTH]
 seaweed_y =[WIDTH,WIDTH,WIDTH]
+bubble_x = [WIDTH, WIDTH, WIDTH]
+bubble_y = [WIDTH, WIDTH, WIDTH]
 up = False
 down = False
 
@@ -20,11 +22,18 @@ def update(delta_time):
             seaweed_x[index] -= 1360
             seaweed_x[index] = random.randrange(WIDTH, WIDTH + 50)
             seaweed_y[index] = random.randrange(0, HEIGHT)
+#bubble
+    for index in range(len(bubble_x)):
+        bubble_x[index] -= 6
 
+        if bubble_x [index] < 0:
+            bubble_x [index] -= 1360
+            bubble_x [index] = random.randrange (WIDTH, WIDTH + 50)
+            bubble_y [index] = random.randrange (0, HEIGHT)
 
 def on_draw():
     arcade.start_render()
-    # Draw in here...\
+# screens and fish
     if current_screen == "menu":
         arcade.draw_text(
                          "Welcome to Fishy Goes Home", WIDTH/2, HEIGHT/2, arcade.color.BLUE)
@@ -39,6 +48,10 @@ def on_draw():
 #seaweed drawing
     for x, y in zip(seaweed_x, seaweed_y):
         arcade.draw_rectangle_filled(x, y, 10,80, arcade.color.SPRING_GREEN)
+
+#bubble drawing
+    for x, y in zip(bubble_x, bubble_y):
+        arcade.draw_circle_filled(x, y, 5, arcade.color.LIGHT_BLUE)
 
 def on_key_press(key, modifiers):
     global current_screen, fish_x, fish_y
