@@ -1,16 +1,73 @@
 import arcade
+import random
 
 
 WIDTH = 1360
 HEIGHT = 710
-
+current_screen = "play"
+fish_x = WIDTH/4
+fish_y = HEIGHT/4
+seaweed_x = [WIDTH,WIDTH, WIDTH]
+seaweed_y =[WIDTH,WIDTH,WIDTH]
 up = False
 down = False
-fish_x = HEIGHT/2
-fish_y = WIDTH/ 2
+
+def update(delta_time):
+    for index in range(len(seaweed_x)):
+        seaweed_x[index] -= 6
+
+        if seaweed_x[index] < 0:
+            seaweed_x[index] -= 1360
+            seaweed_x[index] = random.randrange(WIDTH, WIDTH + 50)
+            seaweed_y[index] = random.randrange(0, HEIGHT)
+
+
+def on_draw():
+    arcade.start_render()
+    # Draw in here...\
+    if current_screen == "menu":
+        arcade.draw_text(
+                         "Welcome to Fishy Goes Home", WIDTH/2, HEIGHT/2, arcade.color.BLUE)
+        arcade.draw_text("press I for instructions ", WIDTH/2, HEIGHT/2-30, arcade.color.RED)
+        arcade.draw_text("press P for play screen", WIDTH / 2, HEIGHT / 2 - 60, arcade.color.RED)
+    elif current_screen == "instruction":
+        arcade.draw_text("instructions: W: up, S: down, collect bubbles and move away from other objects", WIDTH/16, HEIGHT/2, arcade.color.RED)
+        arcade.draw_text("press esc to go back to main menu", WIDTH/16, HEIGHT/2-30, arcade.color.RED)
+    elif current_screen == "play":
+        arcade.draw_circle_filled(fish_x, fish_y, 25, arcade.color.ORANGE)
+        arcade.draw_circle_filled(fish_x + 10, fish_y, 2, arcade.color.BLACK)
+#seaweed drawing
+    for x, y in zip(seaweed_x, seaweed_y):
+        arcade.draw_rectangle_filled(x, y, 10,80, arcade.color.SPRING_GREEN)
+
+def on_key_press(key, modifiers):
+    global current_screen, fish_x, fish_y
+    print (key)
+    if key == arcade.key.I:
+        current_screen = "instruction"
+    elif key == arcade.key.ESCAPE:
+        current_screen = "menu"
+    elif key == arcade.key.P:
+        current_screen = "play screen"
+    if key == arcade.key.W:
+        fish_y += 50
+    elif key == arcade.key.S:
+        fish_y -= 50
+    elif key == arcade.key.A:
+        fish_x -=50
+    elif key == arcade.key.D:
+        fish_x += 50
+def on_key_release(key, modifiers):
+    pass
+
+
+def on_mouse_press(x, y, button, modifiers):
+    pass
+
+
 def setup():
     arcade.open_window(WIDTH, HEIGHT, "My Arcade Game")
-    arcade.set_background_color(arcade.color.WHITE)
+    arcade.set_background_color(arcade.color.DARK_BLUE)
     arcade.schedule(update, 1/60)
 
     # Override arcade window methods
@@ -21,39 +78,6 @@ def setup():
     window.on_mouse_press = on_mouse_press
 
     arcade.run()
-
-
-def update(delta_time):
-    global up, down, fish_x
-    if up == True:
-        fish_x += 10
-    if down == True:
-        fish_x -= 10
-
-
-
-def on_draw():
-    arcade.start_render()
-    if fish_x == HEIGHT/2:
-        arcade.draw_circle_filled(100, 100, 25, arcade.color.BLUE)
-
-
-def on_key_press(key, modifiers):
-    global fish_x
-    print (key)
-    if key == arcade.key. W:
-        fish_x += 10
-    elif key == arcade.key.S:
-        fish_x -= 10
-
-
-
-def on_key_release(key, modifiers):
-    pass
-
-
-def on_mouse_press(x, y, button, modifiers):
-    pass
 
 
 if __name__ == '__main__':
