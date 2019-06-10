@@ -1,10 +1,10 @@
 import arcade
 
 
-WIDTH = 640
-HEIGHT = 480
+WIDTH = 1360
+HEIGHT = 710
 
-player_health = 99
+player_health = 100
 player_max_health = 100
 
 
@@ -32,21 +32,21 @@ def on_draw():
     max_bar_width = 200
     bar_height = 50
     arcade.draw_xywh_rectangle_filled(WIDTH/2 - max_bar_width/2,
-                                      HEIGHT/2 - bar_height/2,
+                                      HEIGHT - bar_height,
                                       max_bar_width,
                                       bar_height,
                                       arcade.color.BLUE)
 
     health_width = player_health / player_max_health * max_bar_width
     arcade.draw_xywh_rectangle_filled(WIDTH / 2 - max_bar_width / 2,
-                                      HEIGHT / 2 - bar_height / 2,
+                                      HEIGHT - bar_height,
                                       health_width,
                                       bar_height,
                                       arcade.color.RED)
 
     arcade.draw_text(f"{player_health}/{player_max_health}",
                      WIDTH/2 - max_bar_width/2,
-                     HEIGHT / 2 - bar_height / 2,
+                     HEIGHT - bar_height,
                      arcade.color.BLACK,
                      font_size=30)
 
