@@ -12,6 +12,8 @@ bubble_x = [WIDTH, WIDTH, WIDTH, WIDTH]
 bubble_y = [WIDTH, WIDTH, WIDTH, WIDTH]
 up = False
 down = False
+left = False
+right = False
 player_health = 100
 player_max_health = 100
 
@@ -33,7 +35,19 @@ def update(delta_time):
             bubble_x[index] -= 1360
             bubble_x[index] = random.randrange(WIDTH, WIDTH + 50)
             bubble_y[index] = random.randrange(0, HEIGHT)
-
+# movement
+    if fish [1] <= HEIGHT:
+        if up == True:
+            fish [1] +=10
+    if fish[1] >= 1:
+        if down == True:
+            fish[1] -= 10
+    if fish [0] >= 1:
+        if left == True:
+            fish[0] -= 10
+    if fish[0] <= WIDTH:
+        if right == True:
+            fish[0] += 10
 
 # health bar
 
@@ -89,30 +103,39 @@ def on_draw():
 
 
 def on_key_press(key, modifiers):
-    global current_screen, fish
+    global current_screen, fish, up, down, left, right
     print(key)
     if key == arcade.key.I:
         current_screen = "instruction"
     elif key == arcade.key.ESCAPE:
         current_screen = "menu"
+
     elif key == arcade.key.P:
         current_screen = "play"
     if key == arcade.key.W:
-        fish[1] += 50
-    elif key == arcade.key.S:
-        fish[1] -= 50
-    elif key == arcade.key.A:
-        fish[1] -= 50
-    elif key == arcade.key.D:
-        fish[0] += 50
+       up = True
+    if key == arcade.key.S:
+        down =True
+    if key == arcade.key.A:
+        left = True
+    if key == arcade.key.D:
+        right = True
 
     if key == arcade.key.B:
         current_screen = "over"
 
 
 def on_key_release(key, modifiers):
-    pass
-
+    global current_screen, fish, up, down, left,right
+    if current_screen == "play":
+        if key == arcade.key.W:
+            up = False
+        if key == arcade.key.S:
+            down = False
+        if key == arcade.key.A:
+            left = False
+        if key == arcade.key.D:
+            right = False
 
 def on_mouse_press(x, y, button, modifiers):
     pass
