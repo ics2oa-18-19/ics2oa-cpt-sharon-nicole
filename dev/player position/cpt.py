@@ -42,7 +42,7 @@ def on_draw():
     # screens and fish
     if current_screen == "menu":
         arcade.draw_text(
-            "Welcome to Fishy Goes Home", WIDTH / 2, HEIGHT / 2, arcade.color.WHITE)
+            "Fishy", WIDTH /4 , HEIGHT/2, arcade.color.WHITE, font_size= 100)
         arcade.draw_text("press I for instructions ", WIDTH / 2, HEIGHT / 2 - 30, arcade.color.RED)
         arcade.draw_text("press P for play screen", WIDTH / 2, HEIGHT / 2 - 60, arcade.color.RED)
         arcade.draw_circle_filled(fish[0], fish[1], 100, arcade.color.ORANGE)
