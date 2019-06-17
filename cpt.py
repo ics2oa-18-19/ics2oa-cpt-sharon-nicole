@@ -28,7 +28,7 @@ for _ in range(5):
     rock_y.append(y)
 
 def update(delta_time):
-    global health_width, seaweed_x, seaweed_y, fish_x, fish_y, current_screen
+    global seaweed_x, seaweed_y, current_screen
     for index in range(len(seaweed_x)):
         seaweed_x[index] -= 20
 
